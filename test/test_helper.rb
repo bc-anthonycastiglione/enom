@@ -337,6 +337,112 @@ class Test::Unit::TestCase
       EOF
     },
     {
+      :command => "GetDomainInfo (Success)",
+      :request => "https://reseller.enom.com/interface.asp?Command=GetDomainInfo&SLD=test123456test123456&TLD=beer&UID=resellid&PW=resellpw&ResponseType=xml",
+      :response => <<-EOF
+      <?xml version="1.0"?>
+        <interface-response>
+          <GetDomainInfo>
+            <domainname sld="test123456test123456" tld="beer" domainnameid="340724808">test123456test123456.beer</domainname>
+            <multy-langSLD></multy-langSLD>
+            <status>
+              <expiration>1/30/2012 5:23:00 PM</expiration>
+              <escrowliftdate/>
+              <escrowhold/>
+              <deletebydate>1/30/2012 5:23:00 PM</deletebydate>
+              <deletetype/>
+              <registrar>eNom, Inc.</registrar>
+              <registrationstatus>Registered</registrationstatus>
+              <purchase-status>Paid</purchase-status>
+              <belongs-to party-id="{CF869235-0083-4BB0-99DF-DCEAC6F2294E}">resellid</belongs-to>
+            </status>
+            <ParkingEnabled>False</ParkingEnabled>
+            <services>
+              <entry name="dnsserver">
+                <enomDNS value="YES" isDotName="NO"/>
+                <service changable="1">1006</service>
+                <configuration changable="0" type="dns">
+                  <dns>dns1.name-services.com</dns>
+                  <dns>dns2.name-services.com</dns>
+                  <dns>dns3.name-services.com</dns>
+                  <dns>dns4.name-services.com</dns>
+                  <dns>dns5.name-services.com</dns>
+                </configuration>
+              </entry>
+              <entry name="dnssettings">
+                <service changable="0">1021</service>
+                <configuration changable="1" type="host">
+                  <host>
+                    <name><![CDATA[*]]></name>
+                    <type><![CDATA[A]]></type>
+                    <address><![CDATA[69.25.142.5]]></address>
+                    <mxpref><![CDATA[10]]></mxpref>
+                    <iseditable><![CDATA[1]]></iseditable>
+                  </host>
+                  <host>
+                    <name><![CDATA[@]]></name>
+                    <type><![CDATA[A]]></type>
+                    <address><![CDATA[69.25.142.5]]></address>
+                    <mxpref><![CDATA[10]]></mxpref>
+                    <iseditable><![CDATA[1]]></iseditable>
+                  </host>
+                  <host>
+                    <name><![CDATA[www]]></name>
+                    <type><![CDATA[A]]></type>
+                    <address><![CDATA[69.25.142.5]]></address>
+                    <mxpref><![CDATA[10]]></mxpref>
+                    <iseditable><![CDATA[1]]></iseditable>
+                  </host>
+                </configuration>
+              </entry>
+              <entry name="wsb">
+                <service changable="1">1060</service>
+              </entry>
+              <entry name="emailset">
+                <service changable="1">1048</service>
+              </entry>
+              <entry name="wpps">
+                <service changable="1">1123</service>
+              </entry>
+              <entry name="wbl">
+                <wbl>
+                  <statusid><![CDATA[0]]></statusid>
+                  <statusdescr><![CDATA[Available]]></statusdescr>
+                </wbl>
+              </entry>
+              <entry name="mobilizer">
+                <service changable="0">1117</service>
+                <mobilizer/>
+              </entry>
+              <entry name="parking">
+                <service changable="1">1033</service>
+              </entry>
+              <entry name="messaging">
+                <service changable="1">1087</service>
+              </entry>
+              <entry name="map">
+                <service changable="1">1108</service>
+              </entry>
+            </services>
+          </GetDomainInfo>
+          <Command>GETDOMAININFO</Command>
+          <Language>eng</Language>
+          <ErrCount>0</ErrCount>
+          <ResponseCount>0</ResponseCount>
+          <MinPeriod>1</MinPeriod>
+          <MaxPeriod>10</MaxPeriod>
+          <Server>RESELLERTEST</Server>
+          <Site>eNom</Site>
+          <IsLockable>True</IsLockable>
+          <IsRealTimeTLD>True</IsRealTimeTLD>
+          <TimeDifference>+08.00</TimeDifference>
+          <ExecTime>0.344</ExecTime>
+          <Done>true</Done>
+          <debug><![CDATA[]]></debug>
+        </interface-response>
+      EOF
+    },
+    {
       :command => "Extend (Success)",
       :request => "https://reseller.enom.com/interface.asp?Command=Extend&SLD=test123456test123456&TLD=com&UID=resellid&PW=resellpw&ResponseType=xml",
       :response => <<-EOF

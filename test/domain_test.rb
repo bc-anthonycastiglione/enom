@@ -246,6 +246,16 @@ class DomainTest < Test::Unit::TestCase
         end
       end
     end
+
+    context "finding the latest tlds in your account" do
+      setup do
+        @domain = Enom::Domain.find("test123456test123456.beer")
+      end
+
+      should "return a domain object" do
+        assert_kind_of Enom::Domain, @domain
+      end
+    end
   end
 
 end
