@@ -206,6 +206,34 @@ module Enom
       return self
     end
 
+    ##
+    # Get auto-renew state of Domain
+    #
+    # @return [Boolean]
+    #
+    def auto_renew?
+      unless defined?(@auto_renew)
+        response = Client.request('Command' => 'GetRenew', 'SLD' => sld, 'TLD' => tld)
+        validate_response!(response)
+        @auto_renew = response['interface_response']['auto_renew'].to_i
+      end
+      @auto_renew
+    end
+    alias_method :auto_renew, :auto_renew?
+
+    ##
+    # Set auto-renew state for the domain
+    #
+    # @param [Boolean|Integer] auto_renew
+    # @return [Enom::Domain]
+    #
+    def auto_renew=(auto_renew)
+      response = Client.request('Command' => 'SetRenew', 'SLD' => sld, 'TLD' => tld, 'RenewFlag' => auto_renew)
+      validate_response!(response)
+      @auto_renew = auto_renew == 1
+      self
+    end
+
     #
     # synchronize EPP key with Registry, and optionally email it to owner
     #
@@ -302,5 +330,14 @@ module Enom
       return self
     end
 
+    ##
+    # Validate the response from Enom
+    #
+    # @raise [Enom::InterfaceError] If response is invalid
+    def validate_response!(response)
+      unless response.is_a?(Hash) && response.key?('interface_response')
+        raise Enom::InterfaceError, response.inspect
+      end
+    end
   end
 end
