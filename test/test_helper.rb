@@ -754,6 +754,102 @@ class Test::Unit::TestCase
           <debug><![CDATA[  ]]></debug>
         </interface-response>
       EOF
+    },{
+      command: "GetRenew",
+      request: "https://reseller.enom.com/interface.asp?Command=GetRenew&SLD=test123456test123456&TLD=com&UID=resellid&PW=resellpw&ResponseType=xml",
+      response: <<-EOF
+        <?xml version="1.0" encoding="UTF-8"?>
+        <interface-response>
+          <auto-renew>0</auto-renew>
+          <AutoPakRenew>0</AutoPakRenew>
+          <PakExist>0</PakExist>
+          <EmailForwardRenew>0</EmailForwardRenew>
+          <EmailFwdExists>0</EmailFwdExists>
+          <URLForwardRenew>0</URLForwardRenew>
+          <URLFwdExists>0</URLFwdExists>
+          <IDProtectRenew>0</IDProtectRenew>
+          <IDProtectExists>0</IDProtectExists>
+          <MobilizerRenew>0</MobilizerRenew>
+          <Command>GETRENEW</Command>
+          <APIType>API.NET</APIType>
+          <Language>eng</Language>
+          <ErrCount>0</ErrCount>
+          <ResponseCount>0</ResponseCount>
+          <MinPeriod>1</MinPeriod>
+          <MaxPeriod>10</MaxPeriod>
+          <Server>RESELLER1-STG</Server>
+          <Site>eNom</Site>
+          <IsRealTimeTLD>True</IsRealTimeTLD>
+          <TimeDifference>+03.00</TimeDifference>
+          <ExecTime>1.715</ExecTime>
+          <Done>true</Done>
+          <debug><![CDATA[  ]]></debug>
+        </interface-response>
+      EOF
+    },{
+      command: "SetRenew",
+      request: "https://reseller.enom.com/interface.asp?Command=SetRenew&SLD=test123456test123456&TLD=com&RenewFlag=1&UID=resellid&PW=resellpw&ResponseType=xml",
+      response: <<-EOF
+      <?xml version="1.0" encoding="UTF-8"?>
+        <interface-response>
+          <RenewName>1</RenewName>
+          <AutoPakRenew>0</AutoPakRenew>
+          <PakExist>0</PakExist>
+          <EmailForwardRenew>0</EmailForwardRenew>
+          <EmailFwdExists>0</EmailFwdExists>
+          <URLForwardRenew>0</URLForwardRenew>
+          <URLFwdExists>0</URLFwdExists>
+          <IDProtectRenew>0</IDProtectRenew>
+          <IDProtectExists>0</IDProtectExists>
+          <MobilizerRenew>0</MobilizerRenew>
+          <Command>GETRENEW</Command>
+          <APIType>API.NET</APIType>
+          <Language>eng</Language>
+          <ErrCount>0</ErrCount>
+          <ResponseCount>0</ResponseCount>
+          <MinPeriod>1</MinPeriod>
+          <MaxPeriod>10</MaxPeriod>
+          <Server>RESELLER1-STG</Server>
+          <Site>eNom</Site>
+          <IsRealTimeTLD>True</IsRealTimeTLD>
+          <TimeDifference>+03.00</TimeDifference>
+          <ExecTime>1.715</ExecTime>
+          <Done>true</Done>
+          <debug><![CDATA[  ]]></debug>
+        </interface-response>
+        EOF
+    },{
+        command: "SetRenew",
+        request: "https://reseller.enom.com/interface.asp?Command=SetRenew&SLD=test123456test123456&TLD=com&RenewFlag=0&UID=resellid&PW=resellpw&ResponseType=xml",
+        response: <<-EOF
+        <?xml version="1.0" encoding="UTF-8"?>
+          <interface-response>
+            <auto_renew>0</auto_renew>
+            <AutoPakRenew>0</AutoPakRenew>
+            <PakExist>0</PakExist>
+            <EmailForwardRenew>0</EmailForwardRenew>
+            <EmailFwdExists>0</EmailFwdExists>
+            <URLForwardRenew>0</URLForwardRenew>
+            <URLFwdExists>0</URLFwdExists>
+            <IDProtectRenew>0</IDProtectRenew>
+            <IDProtectExists>0</IDProtectExists>
+            <MobilizerRenew>0</MobilizerRenew>
+            <Command>GETRENEW</Command>
+            <APIType>API.NET</APIType>
+            <Language>eng</Language>
+            <ErrCount>0</ErrCount>
+            <ResponseCount>0</ResponseCount>
+            <MinPeriod>1</MinPeriod>
+            <MaxPeriod>10</MaxPeriod>
+            <Server>RESELLER1-STG</Server>
+            <Site>eNom</Site>
+            <IsRealTimeTLD>True</IsRealTimeTLD>
+            <TimeDifference>+03.00</TimeDifference>
+            <ExecTime>1.715</ExecTime>
+            <Done>true</Done>
+            <debug><![CDATA[  ]]></debug>
+          </interface-response>
+        EOF
     }
 
   ]

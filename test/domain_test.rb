@@ -245,6 +245,26 @@ class DomainTest < Test::Unit::TestCase
           assert @domain.unlocked?
         end
       end
+
+      context 'that is currently set to auto-renew' do
+        setup do
+          @domain.auto_renew = 1
+        end
+
+        should 'return proper auto_renew state' do
+          assert @domain.auto_renew?
+        end
+      end
+
+      context 'that is currently set to not auto-renew' do
+        setup do
+          @domain.auto_renew = 0
+        end
+
+        should 'return proper auto_renew state' do
+          assert !@domain.auto_renew?
+        end
+      end
     end
 
     context "finding the latest tlds in your account" do
