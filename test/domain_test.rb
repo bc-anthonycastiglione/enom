@@ -177,6 +177,15 @@ class DomainTest < Test::Unit::TestCase
       end
     end
 
+    context "renewing an expired domain" do
+      setup do
+        @domain = Enom::Domain.update_expired!("test123456test123456.com")
+      end
+      should "renew the domain and return a domain object" do
+        assert_equal @domain.name, "test123456test123456.com"
+      end
+    end
+
     context "finding a domain in your account" do
       setup do
         @domain = Enom::Domain.find("test123456test123456.com")

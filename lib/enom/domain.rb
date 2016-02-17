@@ -107,7 +107,7 @@ module Enom
       sld, tld = parse_sld_and_tld(name)
       opts = {}
       options = options.dup
-      
+
       if options[:nameservers]
         count = 1
         options.delete(:nameservers).each do |nameserver|
@@ -120,7 +120,7 @@ module Enom
 
       opts.merge!("NumYears" => options.delete(:years)) if options[:years]
       opts.merge!(options)
-                  
+
       response = Client.request({"Command" => "Purchase", "SLD" => sld, "TLD" => tld}.merge(opts))
       Domain.find(name)
     end
@@ -167,6 +167,26 @@ module Enom
       opts.merge!("NumYears" => options[:years]) if options[:years]
       response = Client.request({"Command" => "Extend", "SLD" => sld, "TLD" => tld}.merge(opts))
       Domain.find(name)
+    end 
+
+    # Renew a domain that has already expired
+    def self.update_expired!(name, years = 1)
+      unless valid_renewal_length?(years)
+        raise ArgumentError, "Renewal years must be an integer between 1 and 10!"
+      end
+
+      request_params = {
+        "Command"    => "UpdateExpiredDomains",
+        "DomainName" => name,
+        "NumYears"   => years
+      }
+
+      response = Client.request(request_params)
+      response['interface_response']['ErrCount'] == "0" ? Domain.find(name) : false
+    end
+
+    def self.valid_renewal_length?(years)
+      years >= 1 && years <= 10
     end
 
     # Suggest available domains using the namespinner
