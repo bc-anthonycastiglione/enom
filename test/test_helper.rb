@@ -850,6 +850,34 @@ class Test::Unit::TestCase
             <debug><![CDATA[  ]]></debug>
           </interface-response>
         EOF
+    },{
+        command: "UpdateExpiredDomains",
+        request: "https://reseller.enom.com/interface.asp?Command=UpdateExpiredDomains&DomainName=test123456test123456.com&NumYears=1&UID=resellid&PW=resellpw&ResponseType=xml",
+        response: <<-EOF
+          <?xml version="1.0" ?>
+          <interface-response>
+           <ReactivateDomainName>
+            <Status>True</Status>
+            <OrderID>157614452</OrderID>
+           </ReactivateDomainName>
+           <Command>UPDATEEXPIREDDOMAINS</Command>
+           <Language>eng</Language>
+           <ErrCount>0</ErrCount>
+           <ResponseCount>0</ResponseCount>
+           <MinPeriod>1</MinPeriod>
+           <MaxPeriod>10</MaxPeriod>
+           <Server>RESELLERTEST</Server>
+           <Site>enom</Site>
+           <IsLockable>True</IsLockable>
+           <IsRealTimeTLD>True</IsRealTimeTLD>
+           <TimeDifference>+08.00</TimeDifference>
+           <ExecTime>0.938</ExecTime>
+           <Done>true</Done>
+           <debug>
+            <![CDATA[ ]]>
+           </debug>
+          </interface-response>
+        EOF
     }
 
   ]
