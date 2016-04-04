@@ -40,20 +40,30 @@ module Enom
     end
 
     # Find the domain (must be in your account) on Enom
-    def self.find(name)
-      sld, tld = parse_sld_and_tld(name)
+    def self.find(name, tld = nil)
+      if tld.present?
+        sld = name
+      else
+        sld, tld = parse_sld_and_tld(name)
+      end
+
       response = Client.request("Command" => "GetDomainInfo", "SLD" => sld, "TLD" => tld)["interface_response"]["GetDomainInfo"]
       Domain.new(response)
     end
 
     # Determine if the domain is available for purchase
-    def self.check(name)
-      available?(name) ? "available" : "unavailable"
+    def self.check(name, tld = nil)
+      available?(name, tld) ? "available" : "unavailable"
     end
 
     # Boolean helper method to determine if the domain is available for purchase
-    def self.available?(name)
-      sld, tld = parse_sld_and_tld(name)
+    def self.available?(name, tld = nil)
+      if tld.present?
+        sld = name
+      else
+        sld, tld = parse_sld_and_tld(name)
+      end
+
       response = Client.request("Command" => "Check", "SLD" => sld, "TLD" => tld)["interface_response"]["RRPCode"]
       response == "210"
     end
