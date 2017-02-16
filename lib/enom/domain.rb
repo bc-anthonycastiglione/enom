@@ -1,3 +1,5 @@
+require 'active_support'
+require 'active_support/core_ext/object/blank'
 require "public_suffix"
 
 module Enom
@@ -175,9 +177,14 @@ module Enom
       sld, tld = parse_sld_and_tld(name)
       opts = {}
       opts.merge!("NumYears" => options[:years]) if options[:years]
-      response = Client.request({"Command" => "Extend", "SLD" => sld, "TLD" => tld}.merge(opts))
-      Domain.find(name)
-    end 
+      renew_response = Client.request({"Command" => "Extend", "SLD" => sld, "TLD" => tld}.merge(opts))
+      domain = Domain.find(name)
+      # Enom doesn't make the new registration date immediately available in the find request, so we patch that
+      # value into the object.
+      registry_exp_date = renew_response.parsed_response['interface_response']['DomainInfo']['RegistryExpDate']
+      domain.expiration_date = Date.strptime(registry_exp_date.split(" ").first, '%Y-%m-%d')
+      domain
+    end
 
     # Renew a domain that has already expired
     def self.update_expired!(name, years = 1)
@@ -324,6 +331,10 @@ module Enom
         @expiration_date = Date.strptime(date_string.split(" ").first, "%m/%d/%Y")
       end
       @expiration_date
+    end
+
+    def expiration_date=(date)
+      @expiration_date = date
     end
 
     def registration_status

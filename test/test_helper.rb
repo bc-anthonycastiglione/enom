@@ -450,6 +450,9 @@ class Test::Unit::TestCase
         <interface-response>
           <Extension>successful</Extension>
           <DomainName>test123456test123456.com</DomainName>
+          <DomainInfo>
+            <RegistryExpDate>2013-01-30 19:07:50.000</RegistryExpDate>
+          </DomainInfo>
           <OrderID>157609742</OrderID>
           <RRPCode>200</RRPCode>
           <RRPText>Command completed successfully</RRPText>
