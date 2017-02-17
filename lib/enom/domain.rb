@@ -1,5 +1,6 @@
 require 'active_support'
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/date/calculations'
 require "public_suffix"
 
 module Enom
@@ -199,7 +200,22 @@ module Enom
       }
 
       response = Client.request(request_params)
-      response['interface_response']['ErrCount'] == "0" ? Domain.find(name) : false
+      if response['interface_response']['ErrCount'] != "0"
+        return false
+      end
+
+      domain = Domain.find(name)
+      # Enom doesn't make the new registration date and status immediately available in the find request, so
+      # we patch that value into the object if necessary.
+      if (domain.expiration_date < Date.today)
+        domain.expiration_date = domain.expiration_date.advance(years: years)
+      end
+
+      if (domain.registration_status == "Expired")
+        domain.registration_status = "Registered"
+      end
+
+      domain
     end
 
     def self.valid_renewal_length?(years)
@@ -340,6 +356,10 @@ module Enom
     def registration_status
       get_extended_domain_attributes unless @registration_status
       return @registration_status
+    end
+
+    def registration_status=(status)
+      @registration_status = status
     end
 
     def active?
