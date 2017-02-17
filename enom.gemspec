@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "enom"
-  s.version = "1.1.7"
+  s.version = "1.1.8"
   s.authors = ["James Miller"]
   s.summary = %q{Ruby wrapper for the Enom API}
   s.description = %q{Enom is a Ruby wrapper and command line interface for portions of the Enom domain reseller API.}
@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
   s.add_dependency "httparty", "~> 0.10.0"
   s.add_dependency "public_suffix", "~> 1.5.3"
+  s.add_dependency "activesupport", "> 4.2"
   s.add_development_dependency "test-unit"
   s.add_development_dependency "shoulda"
   s.add_development_dependency "fakeweb"

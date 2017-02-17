@@ -175,6 +175,11 @@ class DomainTest < Test::Unit::TestCase
         assert_kind_of Enom::Domain, @domain
         assert_equal @domain.name, "test123456test123456.com"
       end
+
+      should "return the domain reflecting the new expiration date" do
+        original_expiration_date = Enom::Domain.find('test123456test123456.com').expiration_date
+        assert_true (@domain.expiration_date - original_expiration_date).to_i > 365
+      end
     end
 
     context "renewing an expired domain" do
