@@ -189,6 +189,15 @@ class DomainTest < Test::Unit::TestCase
       should "renew the domain and return a domain object" do
         assert_equal @domain.name, "test123456test123456.com"
       end
+
+      should "return the domain reflecting the new expiration date" do
+        original_expiration_date = Enom::Domain.find('test123456test123456.com').expiration_date
+        assert_equal @domain.expiration_date, original_expiration_date.advance(years: 1)
+      end
+
+      should "return the domain reflecting the new regisration status" do
+        assert_true @domain.registration_status == "Registered"
+      end
     end
 
     context "finding a domain in your account" do
