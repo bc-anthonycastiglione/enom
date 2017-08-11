@@ -396,7 +396,7 @@ module Enom
     #
     # @raise [Enom::InterfaceError] If response is invalid
     def validate_response!(response)
-      unless response.is_a?(Hash) && response.key?('interface_response')
+      unless response.respond_to?(:key?) && response.key?('interface_response')
         raise Enom::InterfaceError, response.inspect
       end
     end

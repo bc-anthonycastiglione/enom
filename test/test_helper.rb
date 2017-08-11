@@ -124,7 +124,7 @@ class Test::Unit::TestCase
     },
     {
       :command => "Check Many with default (*) TLD list (Success)",
-      :request => "https://reseller.enom.com/interface.asp?Command=Check&SLD=test123456test123456&TLD=*&TLDList=&UID=resellid&PW=resellpw&ResponseType=xml",
+      :request => "https://reseller.enom.com/interface.asp?Command=Check&SLD=test123456test123456&TLD=%2A&TLDList=&UID=resellid&PW=resellpw&ResponseType=xml",
       :response => <<-EOF
         <?xml version="1.0"?>
         <interface-response>
