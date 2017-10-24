@@ -21,7 +21,7 @@ Enom::Client.username = "foo"
 Enom::Client.password = "bar"
 Enom::Client.test = true
 # Declaring test mode is optional, defaults to false (production)
-# Test mode will run commands on Enom's reseller test platform
+# Test mode will run commands on Enom's resellertest.enom.com test platform
 ```
 
 Once these are set, subsequent commands will make calls to the API using your credentials (HTTPS).  Any methods in the library that charge or refund the account in any way end with a bang (!).
@@ -101,6 +101,18 @@ d.renew!
 # Renew domain for specific number of years
 d.renew!(:years => 3)
 ```
+
+## Host Override and Proxy/Tunnel Support
+
+If you want to use an HTTP proxy server to avoid having to add an IP to the Enom IP whitelist
+(which has been known to be slow/flaky to recognize new IPs), you can set the
+`proxyaddr` client option to point to your proxy server:
+
+```
+Enom::Client.proxyaddr = 'enom-proxy.example.com'
+```
+
+You can also optionally set `proxyport`, `proxyuser`, and `proxypass`.
 
 ## Copyright
 

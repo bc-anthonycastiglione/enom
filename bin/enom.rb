@@ -24,6 +24,12 @@ enom -u username -p password command
 You can run commands from the test interface with the -t flag:
 enom -u username -p password -t command
 
+You can set an http proxy host with the --proxyaddr flag, e.g. to use a proxy
+server with an already-whitelisted IP. You can also optionally specify
+the proxy port, user, and password.
+
+enom -u username -p password --proxyaddr enom-proxy.example.com --proxyport 1080 --proxyuser user --proxypass pass
+
 == Commands
 
 All commands are executed as enom [options] command [command-options] args
@@ -54,6 +60,18 @@ global = OptionParser.new do |opts|
   end
   opts.on("-t") do
     Enom::Client.test = true
+  end
+  opts.on("--proxyaddr [ARG]") do |proxyaddr|
+    Enom::Client.proxyaddr = proxyaddr
+  end
+  opts.on("--proxyport [ARG]") do |proxyport|
+    Enom::Client.proxyport = proxyport
+  end
+  opts.on("--proxyuser [ARG]") do |proxyuser|
+    Enom::Client.proxyuser = proxyuser
+  end
+  opts.on("--proxypass [ARG]") do |proxypass|
+    Enom::Client.proxypass = proxypass
   end
 end
 

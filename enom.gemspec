@@ -8,13 +8,15 @@ Gem::Specification.new do |s|
   s.email = "bensie@gmail.com"
   s.files  = %w( README.md Rakefile LICENSE ) + ["lib/enom.rb"] + Dir.glob("lib/enom/*.rb") + Dir.glob("lib/enom/commands/*.rb") + Dir.glob("test/**/*") + Dir.glob("bin/*")
   s.has_rdoc = false
-  s.add_dependency "httparty", "~> 0.10.0"
+  s.add_dependency "httparty", "~> 0.15"
   s.add_dependency "public_suffix", "~> 3.0.0"
   s.add_dependency "activesupport", "> 4.2"
   s.add_development_dependency "test-unit"
-  s.add_development_dependency "shoulda"
-  s.add_development_dependency "fakeweb"
-  s.add_development_dependency "rake", "~> 0.9"
+  s.add_development_dependency "shoulda", "~> 3.5"
+  # chrisk is updating fakeweb, but hasn't released a gem yet - see https://github.com/chrisk/fakeweb/issues/57#issuecomment-325515168
+  # Once a gem is released, remove the line in the Gemfile and uncomment this one
+  # s.add_development_dependency "fakeweb"
+  s.add_development_dependency "rake", "~> 12.0"
   s.executables = %w(enom)
   s.default_executable = "enom"
 end
